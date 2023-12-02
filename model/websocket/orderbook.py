@@ -33,3 +33,6 @@ class Transaction(object):
     buy_or_sell = Column(String)
     taker_txid = Column(Integer)
     maker_txid = Column(Integer)
+
+
+Base.metadata.create_all(bind=engine)
