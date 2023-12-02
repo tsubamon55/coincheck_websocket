@@ -1,0 +1,29 @@
+import json
+from websocket import create_connection
+import requests
+
+from controller import run
+
+
+def stream():
+    ws = create_connection("wss://ws-api.coincheck.com/")
+
+    ws.send(json.dumps({
+       "type": "subscribe",
+       "channel": "btc_jpy-orderbook"
+    }))
+
+    while True:
+        print(ws.recv())
+
+
+def get_ticker():
+    url = 'https://coincheck.com/api/order_books'
+    resp = requests.get(url)
+    print(resp.json())
+
+
+if __name__ == '__main__':
+    from model.base import init_db
+    init_db()
+    run()
