@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, DateTime, Float, Integer, String
+from sqlalchemy import Column, Float, Integer, String
 import pymysql
 
 import settings
@@ -35,4 +35,5 @@ class Transaction(object):
     maker_txid = Column(Integer)
 
 
-Base.metadata.create_all(bind=engine)
+def init():
+    Base.metadata.create_all(bind=engine)
