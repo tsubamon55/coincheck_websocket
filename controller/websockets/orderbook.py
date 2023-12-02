@@ -3,6 +3,10 @@ from websocket import create_connection
 
 import settings
 from model.websocket.orderbook import Transaction, session
+import logging
+import json
+
+logger = logging.getLogger(__name__)
 
 
 class WebsocketBot(object):
@@ -14,9 +18,11 @@ class WebsocketBot(object):
            "type": "subscribe",
            "channel": "btc_jpy-trades"
         }))
+        logger.info('connected')
         while True:
-            tx = self.ws.recv()
+            tx = json.loads(self.ws.recv())
             for t in tx:
+                logger.info(t)
                 column = Transaction(
                     timestamp=t[0],
                     txid=t[1],

@@ -23,16 +23,16 @@ session = SessionClass()
 Base = declarative_base()
 
 
-class Transaction(object):
+class Transaction(Base):
     __tablename__ = 'orderbook'
     timestamp = Column(Integer)
-    txid = Column(Integer)
+    txid = Column(String(16), primary_key=True)
     trade_pair = Column(String(16))
     rate = Column(Float)
     amount = Column(Float)
-    buy_or_sell = Column(String)
-    taker_txid = Column(Integer)
-    maker_txid = Column(Integer)
+    buy_or_sell = Column(String(8))
+    taker_txid = Column(String(16))
+    maker_txid = Column(String(16))
 
 
 def init():
